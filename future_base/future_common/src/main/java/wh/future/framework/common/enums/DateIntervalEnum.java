@@ -3,7 +3,6 @@ package wh.future.framework.common.enums;
 import cn.hutool.core.util.ArrayUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import wh.future.framework.common.core.ArrayAble;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package wh.future.framework.common.util.io;
+package wh.future.framework.common.util.file;
 
 import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;
@@ -12,7 +12,6 @@ import lombok.SneakyThrows;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 
 public class FileUtils {

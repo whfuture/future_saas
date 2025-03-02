@@ -1,4 +1,4 @@
-package wh.future.framework.common.core;
+package wh.future.framework.common.enums;
 
 /**
  * 返回所有枚举

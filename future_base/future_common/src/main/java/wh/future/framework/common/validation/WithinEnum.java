@@ -1,30 +1,27 @@
-package wh.future.framework.common.check;
-
+package wh.future.framework.common.validation;
 
 import wh.future.framework.common.enums.ArrayAble;
 
 import javax.validation.Constraint;
 import java.lang.annotation.*;
 
+/**
+ * 判断在枚举范围内
+ */
 @Target({
         ElementType.METHOD,
         ElementType.FIELD,
         ElementType.ANNOTATION_TYPE,
         ElementType.CONSTRUCTOR,
         ElementType.PARAMETER,
-        ElementType.TYPE_USE
 })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(
-        validatedBy = {InEnumsChecker.class}
+        validatedBy = {WithinEnumValidator.class, WithinEnumCollectionValidator.class}
 )
-public @interface InEnums {
+public @interface WithinEnum {
+    Class<? extends ArrayAble<?>> values();
 
-    Class<? extends ArrayAble<?>> value();
-
-    String message() default "必须在指定范围:{}";
-
-
-
+    String message() default "must within the scope {values}";
 }

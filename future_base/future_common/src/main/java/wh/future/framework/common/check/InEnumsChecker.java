@@ -1,8 +1,7 @@
 package wh.future.framework.common.check;
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Sets;
-import wh.future.framework.common.core.ArrayAble;
+import wh.future.framework.common.enums.ArrayAble;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
