@@ -3,24 +3,26 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>wh.future</groupId>
-        <artifactId>saas</artifactId>
+        <artifactId>future_base</artifactId>
         <version>2025.02.12-cq</version>
     </parent>
 
-    <artifactId>future_base</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>future-spring-boot-starter-kafka</artifactId>
+    <packaging>jar</packaging>
 
-    <name>future_base</name>
+    <name>future-spring-boot-starter-kafka</name>
     <url>http://maven.apache.org</url>
-    <modules>
-        <module>future_common</module>
-        <module>future-spring-boot-starter-web</module>
-        <module>future-spring-boot-starter-kafka</module>
-        <module>future-spring-boot-starter-redis</module>
-    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- 消息队列相关 -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>
