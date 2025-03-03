@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.BatchStrategies;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -15,23 +16,18 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.util.StringUtils;
 import wh.future.framework.redis.cache.core.TimeoutRedisCacheManager;
-
 import java.util.Objects;
-
 import static wh.future.framework.redis.cache.config.RedisInitConfiguration.buildRedisSerializer;
 
 @AutoConfiguration
 @EnableCaching
 @EnableConfigurationProperties({RedisCacheProperties.class, CacheProperties.class})
-public class RedisCacheConfiguration {
+public class FutureRedisCacheConfiguration {
 
     @Bean
     @Primary
-    public org.springframework.data.redis.cache.RedisCacheConfiguration redisCacheConfiguration(CacheProperties cacheProperties) {
-        org.springframework.data.redis.cache.RedisCacheConfiguration config = org.springframework.data.redis.cache.RedisCacheConfiguration.defaultCacheConfig();
-        // 设置使用 : 单冒号，而不是双 :: 冒号，避免 Redis Desktop Manager 多余空格
-        // 详细可见 https://blog.csdn.net/chuixue24/article/details/103928965 博客
-        // 再次修复单冒号，而不是双 :: 冒号问题，Issues 详情：https://gitee.com/zhijiantianya/yudao-cloud/issues/I86VY2
+    public RedisCacheConfiguration redisCacheConfiguration(CacheProperties cacheProperties) {
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
         config = config.computePrefixWith(cacheName -> {
             String keyPrefix = cacheProperties.getRedis().getKeyPrefix();
             if (StringUtils.hasText(keyPrefix)) {
@@ -60,7 +56,7 @@ public class RedisCacheConfiguration {
 
     @Bean
     public RedisCacheManager redisCacheManager(RedisTemplate<String, Object> redisTemplate,
-                                               org.springframework.data.redis.cache.RedisCacheConfiguration redisCacheConfiguration,
+                                               RedisCacheConfiguration redisCacheConfiguration,
                                                RedisCacheProperties redisCacheProperties) {
         RedisConnectionFactory connectionFactory = Objects.requireNonNull(redisTemplate.getConnectionFactory());
         RedisCacheWriter cacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory,
