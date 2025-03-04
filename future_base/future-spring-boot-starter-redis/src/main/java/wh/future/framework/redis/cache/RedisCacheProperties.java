@@ -1,4 +1,4 @@
-package wh.future.framework.redis.cache.config;
+package wh.future.framework.redis.cache;
 
 
 import lombok.Data;

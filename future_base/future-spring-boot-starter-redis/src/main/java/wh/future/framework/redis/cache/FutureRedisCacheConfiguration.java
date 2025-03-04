@@ -1,4 +1,4 @@
-package wh.future.framework.redis.cache.config;
+package wh.future.framework.redis.cache;
 
 import cn.hutool.core.util.StrUtil;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -15,9 +15,9 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.util.StringUtils;
-import wh.future.framework.redis.cache.core.TimeoutRedisCacheManager;
+
 import java.util.Objects;
-import static wh.future.framework.redis.cache.config.RedisInitConfiguration.buildRedisSerializer;
+import static wh.future.framework.redis.cache.RedisInitConfiguration.buildRedisSerializer;
 
 @AutoConfiguration
 @EnableCaching

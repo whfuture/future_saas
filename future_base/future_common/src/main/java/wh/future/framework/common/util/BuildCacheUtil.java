@@ -1,4 +1,4 @@
-package wh.future.framework.common.util.cache;
+package wh.future.framework.common.util;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

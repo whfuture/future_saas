@@ -1,4 +1,4 @@
-package wh.future.framework.common.util.json;
+package wh.future.framework.common.util;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;

@@ -1,4 +1,4 @@
-package wh.future.framework.common.util.file;
+package wh.future.framework.common.util;
 
 import cn.hutool.core.io.FileTypeUtil;
 import cn.hutool.core.io.FileUtil;

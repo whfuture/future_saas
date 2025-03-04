@@ -1,4 +1,4 @@
-package wh.future.framework.common.util.money;
+package wh.future.framework.common.util;
 
 import cn.hutool.core.math.Money;
 import cn.hutool.core.util.NumberUtil;

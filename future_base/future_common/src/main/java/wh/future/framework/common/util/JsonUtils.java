@@ -1,4 +1,4 @@
-package wh.future.framework.common.util.json;
+package wh.future.framework.common.util;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;

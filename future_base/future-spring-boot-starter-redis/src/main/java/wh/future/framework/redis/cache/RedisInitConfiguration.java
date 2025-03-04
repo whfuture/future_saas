@@ -1,4 +1,4 @@
-package wh.future.framework.redis.cache.config;
+package wh.future.framework.redis.cache;
 
 import cn.hutool.core.util.ReflectUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;

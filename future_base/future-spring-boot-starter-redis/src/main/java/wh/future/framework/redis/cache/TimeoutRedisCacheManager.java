@@ -1,4 +1,4 @@
-package wh.future.framework.redis.cache.core;
+package wh.future.framework.redis.cache;
 
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;

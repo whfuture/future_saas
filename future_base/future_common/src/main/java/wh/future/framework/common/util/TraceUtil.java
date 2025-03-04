@@ -1,4 +1,4 @@
-package wh.future.framework.common.util.trace;
+package wh.future.framework.common.util;
 
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 

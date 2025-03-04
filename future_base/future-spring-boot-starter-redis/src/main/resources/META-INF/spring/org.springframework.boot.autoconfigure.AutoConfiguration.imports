@@ -1,2 +1,2 @@
-wh.future.framework.redis.cache.config.FutureRedisCacheConfiguration
-wh.future.framework.redis.cache.config.RedisInitConfiguration
+wh.future.framework.redis.cache.FutureRedisCacheConfiguration
+wh.future.framework.redis.cache.RedisInitConfiguration
