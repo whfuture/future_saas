@@ -8,14 +8,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.connection.stream.ObjectRecord;
 import org.springframework.data.redis.stream.StreamListener;
 import wh.future.framework.common.util.JsonUtils;
-
 import java.lang.reflect.Type;
 import java.util.List;
+
 
 public abstract class AbstractRedisStreamMessageListener<T extends AbstractRedisStreamMessage>
         implements StreamListener<String, ObjectRecord<String, String>> {
 
+
     private final Class<T> messageType;
+
     @Getter
     private final String streamKey;
 
@@ -34,13 +36,14 @@ public abstract class AbstractRedisStreamMessageListener<T extends AbstractRedis
 
     @Override
     public void onMessage(ObjectRecord<String, String> message) {
+        // 消费消息
         T messageObj = JsonUtils.parseObject(message.getValue(), messageType);
         try {
-            beforeConsumeMessage(messageObj);
+            consumeMessageBefore(messageObj);
             this.onMessage(messageObj);
             redisEventTemplate.getRedisTemplate().opsForStream().acknowledge(group, message);
         } finally {
-            afterConsumeMessage(messageObj);
+            consumeMessageAfter(messageObj);
         }
     }
 
@@ -55,19 +58,18 @@ public abstract class AbstractRedisStreamMessageListener<T extends AbstractRedis
         return (Class<T>) type;
     }
 
-    private void beforeConsumeMessage(AbstractRedisMessage message) {
+    private void consumeMessageBefore(AbstractRedisMessage message) {
         assert redisEventTemplate != null;
         List<RedisMessageInterceptor> interceptors = redisEventTemplate.getInterceptors();
         interceptors.forEach(interceptor -> interceptor.consumeMessageBefore(message));
     }
 
-    private void afterConsumeMessage(AbstractRedisMessage message) {
+    private void consumeMessageAfter(AbstractRedisMessage message) {
         assert redisEventTemplate != null;
         List<RedisMessageInterceptor> interceptors = redisEventTemplate.getInterceptors();
         for (int i = interceptors.size() - 1; i >= 0; i--) {
             interceptors.get(i).consumeMessageAfter(message);
         }
     }
-
 
 }
