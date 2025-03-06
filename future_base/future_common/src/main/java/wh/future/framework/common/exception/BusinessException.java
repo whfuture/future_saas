@@ -12,7 +12,6 @@ public class BusinessException extends RuntimeException {
     private String message;
 
     public BusinessException() {
-
     }
 
     public BusinessException(ErrorCode errorCode) {
@@ -38,4 +37,5 @@ public class BusinessException extends RuntimeException {
     public String getMessage() {
         return message;
     }
+
 }

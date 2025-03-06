@@ -68,5 +68,16 @@
             <artifactId>mockito-inline</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>wh.future</groupId>
+            <artifactId>future_common</artifactId>
+            <version>2025.02.12-cq</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
