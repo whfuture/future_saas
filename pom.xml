@@ -11,6 +11,7 @@
     <url>https://github.com/whfuture/future_saas</url>
     <modules>
         <module>future_base</module>
+        <module>future_api</module>
     </modules>
 
 
