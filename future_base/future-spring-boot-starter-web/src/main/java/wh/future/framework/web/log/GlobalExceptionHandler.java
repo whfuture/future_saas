@@ -1,9 +1,9 @@
 package wh.future.framework.web.log;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjUtil;
-import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import wh.future.framework.common.pojo.ApiErrorLogCreateReqDTO;
+import wh.future.framework.api.internal.logger.ApiErrorLogApi;
+import wh.future.framework.api.internal.logger.dto.ApiErrorLogCreateReq;
+import wh.future.framework.common.exception.AssertUtils;
+import wh.future.framework.common.exception.BusinessException;
 import wh.future.framework.common.pojo.R;
-import wh.future.framework.common.util.JsonUtils;
+import wh.future.framework.common.util.JsonUtil;
 import wh.future.framework.common.util.ServletUtil;
 import wh.future.framework.common.util.TraceUtil;
 import wh.future.framework.web.util.WebFrameworkUtils;
@@ -34,10 +37,10 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Set;
 
+import static wh.future.framework.common.enums.ErrorCodeConstants.*;
+
 /**
  * 全局异常处理器，将 Exception 翻译成 R + 对应的异常编号
- *
- * @author 芋道源码
  */
 @RestControllerAdvice
 @AllArgsConstructor
@@ -47,7 +50,7 @@ public class GlobalExceptionHandler {
     /**
      * 忽略的 ServiceException 错误提示，避免打印过多 logger
      */
-    public static final Set<String> IGNORE_ERROR_MESSAGES = SetUtils.asSet("无效的刷新令牌");
+    public static final Set<String> IGNORE_ERROR_MESSAGES = CollUtil.newHashSet("无效的刷新令牌");
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private final String applicationName;
@@ -90,8 +93,8 @@ public class GlobalExceptionHandler {
         if (ex instanceof HttpRequestMethodNotSupportedException) {
             return httpRequestMethodNotSupportedExceptionHandler((HttpRequestMethodNotSupportedException) ex);
         }
-        if (ex instanceof ServiceException) {
-            return serviceExceptionHandler((ServiceException) ex);
+        if (ex instanceof BusinessException) {
+            return serviceExceptionHandler((BusinessException) ex);
         }
         if (ex instanceof AccessDeniedException) {
             return accessDeniedExceptionHandler(request, (AccessDeniedException) ex);
@@ -155,7 +158,7 @@ public class GlobalExceptionHandler {
             InvalidFormatException invalidFormatException = (InvalidFormatException) ex.getCause();
             return R.error(BAD_REQUEST.getCode(), String.format("请求参数类型错误:%s", invalidFormatException.getValue()));
         }else {
-            return defaultExceptionHandler(ServletUtils.getRequest(), ex);
+            return defaultExceptionHandler(ServletUtil.getRequest(), ex);
         }
     }
 
@@ -229,15 +232,16 @@ public class GlobalExceptionHandler {
      *
      * 例如说，商品库存不足，用户手机号已存在。
      */
-    @ExceptionHandler(value = ServiceException.class)
-    public R<?> serviceExceptionHandler(ServiceException ex) {
+    @ExceptionHandler(value = BusinessException.class)
+    public R<?> serviceExceptionHandler(BusinessException ex) {
         // 不包含的时候，才进行打印，避免 ex 堆栈过多
         if (!IGNORE_ERROR_MESSAGES.contains(ex.getMessage())) {
             // 即使打印，也只打印第一层 StackTraceElement，并且使用 warn 在控制台输出，更容易看到
             try {
                 StackTraceElement[] stackTraces = ex.getStackTrace();
                 for (StackTraceElement stackTrace : stackTraces) {
-                    if (ObjUtil.notEqual(stackTrace.getClassName(), ServiceExceptionUtil.class.getName())) {
+                    //TODO  AssertUtils.class.getName() 这儿估计有问题
+                    if (ObjUtil.notEqual(stackTrace.getClassName(), AssertUtils.class.getName())) {
                         log.warn("[serviceExceptionHandler]\n\t{}", stackTrace);
                         break;
                     }
@@ -265,23 +269,23 @@ public class GlobalExceptionHandler {
         // 插入异常日志
         createExceptionLog(req, ex);
         // 返回 ERROR R
-        return R.error(INTERNAL_SERVER_ERROR.getCode(), INTERNAL_SERVER_ERROR.getMsg());
+        return R.error(INTERNAL_SERVER_ERROR.getCode(), INTERNAL_SERVER_ERROR.getMessage());
     }
 
     private void createExceptionLog(HttpServletRequest req, Throwable e) {
         // 插入错误日志
-        ApiErrorLogCreateReqDTO errorLog = new ApiErrorLogCreateReqDTO();
+        ApiErrorLogCreateReq errorLog = new ApiErrorLogCreateReq();
         try {
             // 初始化 errorLog
             buildExceptionLog(errorLog, req, e);
             // 执行插入 errorLog
             apiErrorLogApi.createApiErrorLogAsync(errorLog);
         } catch (Throwable th) {
-            log.error("[createExceptionLog][url({}) log({}) 发生异常]", req.getRequestURI(),  JsonUtils.toJsonString(errorLog), th);
+            log.error("[createExceptionLog][url({}) log({}) 发生异常]", req.getRequestURI(),  JsonUtil.toJsonString(errorLog), th);
         }
     }
 
-    private void buildExceptionLog(ApiErrorLogCreateReqDTO errorLog, HttpServletRequest request, Throwable e) {
+    private void buildExceptionLog(ApiErrorLogCreateReq errorLog, HttpServletRequest request, Throwable e) {
         // 处理用户信息
         errorLog.setUserId(WebFrameworkUtils.getLoginUserId(request));
         errorLog.setUserType(WebFrameworkUtils.getLoginUserType(request));
@@ -302,9 +306,9 @@ public class GlobalExceptionHandler {
         errorLog.setApplicationName(applicationName);
         errorLog.setRequestUrl(request.getRequestURI());
         Map<String, Object> requestParams = MapUtil.<String, Object>builder()
-                .put("query", ServletUtil.getParamMap(request))
+                .put("query", ServletUtil.getParamsMap(request))
                 .put("body", ServletUtil.getBody(request)).build();
-        errorLog.setRequestParams(JsonUtils.toJsonString(requestParams));
+        errorLog.setRequestParams(JsonUtil.toJsonString(requestParams));
         errorLog.setRequestMethod(request.getMethod());
         errorLog.setUserAgent(ServletUtil.getUserAgent(request));
         errorLog.setUserIp(ServletUtil.getClientIP(request));

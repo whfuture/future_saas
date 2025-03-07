@@ -12,6 +12,7 @@
     <modules>
         <module>future_base</module>
         <module>future_api</module>
+        <module>future_system</module>
     </modules>
 
 

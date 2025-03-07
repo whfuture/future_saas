@@ -1,4 +1,2 @@
-wh.future.framework.redis.cache.conf.FutureRedisCacheConf
-wh.future.framework.redis.cache.conf.RedisInitConf
-wh.future.framework.redis.event.conf.RedisConsumerConf
-wh.future.framework.redis.event.conf.RedisProducerConf
+wh.future.framework.redis.cache.FutureRedisCacheConfiguration
+wh.future.framework.redis.cache.RedisInitConfiguration

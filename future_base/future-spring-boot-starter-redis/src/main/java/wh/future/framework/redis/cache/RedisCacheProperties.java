@@ -2,8 +2,8 @@ package wh.future.framework.redis.cache;
 
 
 import lombok.Data;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 @Data
 @Validated

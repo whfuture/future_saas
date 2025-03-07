@@ -1,6 +1,7 @@
 package wh.future.framework.common.validation;
 
 import wh.future.framework.common.enums.ArrayAble;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;

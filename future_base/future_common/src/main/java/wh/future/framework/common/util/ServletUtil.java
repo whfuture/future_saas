@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import static cn.hutool.extra.servlet.ServletUtil.getParamMap;
+
 
 public class ServletUtil {
 
@@ -25,7 +27,7 @@ public class ServletUtil {
      */
     @SuppressWarnings("deprecation") // 必须使用 APPLICATION_JSON_UTF8_VALUE，否则会乱码
     public static void writeJSON(HttpServletResponse response, Object object) {
-        String content = JsonUtils.toJsonString(object);
+        String content = JsonUtil.toJsonString(object);
         cn.hutool.extra.servlet.ServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
     }
 
@@ -103,11 +105,11 @@ public class ServletUtil {
     }
 
     public static String getClientIP(HttpServletRequest request) {
-        return cn.hutool.extra.servlet.ServletUtil.getClientIP(request);
+        return ServletUtil.getClientIP(request);
     }
 
-    public static Map<String, String> getParamMap(HttpServletRequest request) {
-        return cn.hutool.extra.servlet.ServletUtil.getParamMap(request);
+    public static Map<String, String> getParamsMap(HttpServletRequest request) {
+        return getParamMap(request);
     }
 
 }

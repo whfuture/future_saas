@@ -4,6 +4,7 @@ import cn.hutool.core.util.NumberUtil;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import wh.future.framework.common.enums.RpcConstants;
 import wh.future.framework.common.enums.TerminalEnum;
 import wh.future.framework.common.pojo.R;
 import wh.future.framework.web.log.WebProperties;
