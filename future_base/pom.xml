@@ -17,6 +17,7 @@
         <module>future-spring-boot-starter-web</module>
         <module>future-spring-boot-starter-kafka</module>
         <module>future-spring-boot-starter-redis</module>
+        <module>future-spring-boot-starter-jackson</module>
     </modules>
 
     <properties>
