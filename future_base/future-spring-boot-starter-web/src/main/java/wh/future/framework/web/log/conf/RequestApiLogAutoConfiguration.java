@@ -25,7 +25,6 @@ public class RequestApiLogAutoConfiguration implements WebMvcConfigurer {
 
     @Bean
     @ConditionalOnProperty(prefix = "future.access-log", value = "enable", matchIfMissing = true)
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public FilterRegistrationBean<ApiAccessLogFilter> apiAccessLogFilter(WebProperties webProperties,
                                                                          @Value("${spring.application.name}") String applicationName,
                                                                          ApiAccessLogApi apiAccessLogApi) {

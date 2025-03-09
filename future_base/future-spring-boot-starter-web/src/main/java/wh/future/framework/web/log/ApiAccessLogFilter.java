@@ -106,7 +106,7 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         accessLog.setUserId(WebFrameworkUtils.getLoginUserId(request))
                 .setUserType(WebFrameworkUtils.getLoginUserType(request));
         // 设置访问结果
-        R<?> result = WebFrameworkUtils.getCommonResult(request);
+        R<?> result = WebFrameworkUtils.getR(request);
         if (result != null) {
             accessLog.setResultCode(result.getCode()).setResultMsg(result.getMsg());
         } else if (ex != null) {

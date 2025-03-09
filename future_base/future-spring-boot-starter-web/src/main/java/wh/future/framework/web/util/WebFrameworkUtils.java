@@ -8,26 +8,19 @@ import wh.future.framework.common.enums.RpcConstants;
 import wh.future.framework.common.enums.TerminalEnum;
 import wh.future.framework.common.pojo.R;
 import wh.future.framework.web.log.WebProperties;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 专属于 web 包的工具类
- *
- * @author 芋道源码
  */
 public class WebFrameworkUtils {
 
     private static final String REQUEST_ATTRIBUTE_LOGIN_USER_ID = "login_user_id";
     private static final String REQUEST_ATTRIBUTE_LOGIN_USER_TYPE = "login_user_type";
-
     private static final String REQUEST_ATTRIBUTE_COMMON_RESULT = "common_result";
-
     public static final String HEADER_TENANT_ID = "tenant-id";
-
     public static final String HEADER_TERMINAL = "terminal";
-
     private static WebProperties properties;
 
     public WebFrameworkUtils(WebProperties webProperties) {
@@ -37,7 +30,6 @@ public class WebFrameworkUtils {
     /**
      * 获得租户编号，从 header 中
      * 考虑到其它 framework 组件也会使用到租户编号，所以不得不放在 WebFrameworkUtils 统一提供
-     *
      * @param request 请求
      * @return 租户编号
      */
@@ -63,7 +55,6 @@ public class WebFrameworkUtils {
     /**
      * 获得当前用户的编号，从请求中
      * 注意：该方法仅限于 framework 框架使用！！！
-     *
      * @param request 请求
      * @return 用户编号
      */
@@ -77,7 +68,6 @@ public class WebFrameworkUtils {
     /**
      * 获得当前用户的类型
      * 注意：该方法仅限于 web 相关的 framework 组件使用！！！
-     *
      * @param request 请求
      * @return 用户编号
      */
@@ -90,13 +80,6 @@ public class WebFrameworkUtils {
         if (userType != null) {
             return userType;
         }
-//        // 2. 其次，基于 URL 前缀的约定
-//        if (request.getServletPath().startsWith(properties.getAdminApi().getPrefix())) {
-//            return UserTypeEnum.ADMIN.getValue();
-//        }
-//        if (request.getServletPath().startsWith(properties.getAppApi().getPrefix())) {
-//            return UserTypeEnum.MEMBER.getValue();
-//        }
         return null;
     }
 
@@ -119,11 +102,11 @@ public class WebFrameworkUtils {
         return NumberUtil.parseInt(terminalValue, TerminalEnum.UNKNOWN.getTerminal());
     }
 
-    public static void setCommonResult(ServletRequest request, R<?> result) {
+    public static void setR(ServletRequest request, R<?> result) {
         request.setAttribute(REQUEST_ATTRIBUTE_COMMON_RESULT, result);
     }
 
-    public static R<?> getCommonResult(ServletRequest request) {
+    public static R<?> getR(ServletRequest request) {
         return (R<?>) request.getAttribute(REQUEST_ATTRIBUTE_COMMON_RESULT);
     }
 
@@ -138,7 +121,6 @@ public class WebFrameworkUtils {
 
     /**
      * 判断是否为 RPC 请求
-     *
      * @param request 请求
      * @return 是否为 RPC 请求
      */
@@ -148,7 +130,6 @@ public class WebFrameworkUtils {
 
     /**
      * 判断是否为 RPC 请求
-     *
      * 约定大于配置，只要以 Api 结尾，都认为是 RPC 接口
      *
      * @param className 类名

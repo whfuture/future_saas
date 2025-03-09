@@ -28,7 +28,7 @@ public class WebResponseBodyHandler implements ResponseBodyAdvice {
     @SuppressWarnings("NullableProblems")
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType,
                                   ServerHttpRequest request, ServerHttpResponse response) {
-        WebFrameworkUtils.setCommonResult(((ServletServerHttpRequest) request).getServletRequest(), (R<?>) body);
+        WebFrameworkUtils.setR(((ServletServerHttpRequest) request).getServletRequest(), (R<?>) body);
         return body;
     }
 
