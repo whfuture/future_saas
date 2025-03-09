@@ -50,16 +50,16 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
 
     private final WebProperties webProperties;
 
-    public ApiAccessLogFilter(WebProperties webProperties, String applicationName, ApiAccessLogApi apiAccessLogApi, WebProperties webProperties1) {
+    public ApiAccessLogFilter(WebProperties webProperties, String applicationName, ApiAccessLogApi apiAccessLogApi) {
         this.applicationName = applicationName;
         this.apiAccessLogApi = apiAccessLogApi;
-        this.webProperties = webProperties1;
+        this.webProperties = webProperties;
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String apiUri = request.getRequestURI().substring(request.getContextPath().length());
-        return !StrUtil.startWithAny(apiUri, webProperties.getControllerApi().getPrefix());
+        return !StrUtil.startWithAny(apiUri, webProperties.getWebApi().getPrefix());
     }
 
     @Override
@@ -71,18 +71,18 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         String requestBody = ServletUtil.isJsonRequest(request) ? ServletUtil.getBody(request) : null;
         try {
             filterChain.doFilter(request, response);
-            createApiAccessLog(request, beginTime, queryString, requestBody, null);
+            doCreateApiAccessLog(request, beginTime, queryString, requestBody, null);
         } catch (Exception ex) {
-            createApiAccessLog(request, beginTime, queryString, requestBody, ex);
+            doCreateApiAccessLog(request, beginTime, queryString, requestBody, ex);
             throw ex;
         }
     }
 
-    private void createApiAccessLog(HttpServletRequest request, LocalDateTime beginTime,
-                                    Map<String, String> queryString, String requestBody, Exception ex) {
+    private void doCreateApiAccessLog(HttpServletRequest request, LocalDateTime beginTime,
+                                      Map<String, String> queryString, String requestBody, Exception ex) {
         ApiAccessLogCreateReq accessLog = new ApiAccessLogCreateReq();
         try {
-            boolean enable = buildApiAccessLog(accessLog, request, beginTime, queryString, requestBody, ex);
+            boolean enable = buildApiAccessLogCreateReq(accessLog, request, beginTime, queryString, requestBody, ex);
             if (!enable) {
                 return;
             }
@@ -92,8 +92,8 @@ public class ApiAccessLogFilter extends OncePerRequestFilter {
         }
     }
 
-    private boolean buildApiAccessLog(ApiAccessLogCreateReq accessLog, HttpServletRequest request, LocalDateTime beginTime,
-                                      Map<String, String> queryString, String requestBody, Exception ex) {
+    private boolean buildApiAccessLogCreateReq(ApiAccessLogCreateReq accessLog, HttpServletRequest request, LocalDateTime beginTime,
+                                               Map<String, String> queryString, String requestBody, Exception ex) {
         HandlerMethod handlerMethod = (HandlerMethod) request.getAttribute(ATTRIBUTE_HANDLER_METHOD);
         ApiAccessLog accessLogAnnotation = null;
         if (handlerMethod != null) {

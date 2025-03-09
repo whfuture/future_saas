@@ -31,6 +31,9 @@ public class AccessLogInterceptor implements HandlerInterceptor {
 
     private static final String ATTRIBUTE_STOP_WATCH = "REQUEST_INDICATORS";
 
+    /**
+     * TODO 难道这个preHandle在filter之前？
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         HandlerMethod handlerMethod = handler instanceof HandlerMethod ? (HandlerMethod) handler : null;
@@ -81,8 +84,9 @@ public class AccessLogInterceptor implements HandlerInterceptor {
             if (!lineNumber.isPresent()) {
                 return;
             }
-            log.info("Controller 方法路径：{}({}.java:{})", clazz.getName(), clazz.getSimpleName(), lineNumber.get());
+            log.info("Controller 方法路径：{}[{}.java:{}]", clazz.getName(), clazz.getSimpleName(), lineNumber.get());
         } catch (Exception ignore) {
+            //everything goes well
         }
     }
 

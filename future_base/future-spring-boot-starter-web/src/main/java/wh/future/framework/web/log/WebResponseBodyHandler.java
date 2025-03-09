@@ -13,23 +13,21 @@ import wh.future.framework.web.util.WebFrameworkUtils;
 
 
 @ControllerAdvice
-public class GlobalResponseBodyHandler implements ResponseBodyAdvice {
+public class WebResponseBodyHandler implements ResponseBodyAdvice {
 
     @Override
-    @SuppressWarnings("NullableProblems") // 避免 IDEA 警告
+    @SuppressWarnings("NullableProblems")
     public boolean supports(MethodParameter returnType, Class converterType) {
         if (returnType.getMethod() == null) {
             return false;
         }
-        // 只拦截返回结果为 CommonResult 类型
         return returnType.getMethod().getReturnType() == R.class;
     }
 
     @Override
-    @SuppressWarnings("NullableProblems") // 避免 IDEA 警告
+    @SuppressWarnings("NullableProblems")
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType,
                                   ServerHttpRequest request, ServerHttpResponse response) {
-        // 记录 Controller 结果
         WebFrameworkUtils.setCommonResult(((ServletServerHttpRequest) request).getServletRequest(), (R<?>) body);
         return body;
     }

@@ -3,7 +3,6 @@ package wh.future.framework.web.request.conf;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -18,8 +17,8 @@ import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import wh.future.framework.api.internal.logger.ApiErrorLogApi;
 import wh.future.framework.common.enums.WebFilterOrderEnum;
-import wh.future.framework.web.log.GlobalExceptionHandler;
-import wh.future.framework.web.log.GlobalResponseBodyHandler;
+import wh.future.framework.web.log.WebExceptionHandler;
+import wh.future.framework.web.log.WebResponseBodyHandler;
 import wh.future.framework.web.log.WebProperties;
 import wh.future.framework.web.request.CacheRequestBodyFilter;
 import wh.future.framework.web.util.WebFrameworkUtils;
@@ -36,15 +35,13 @@ public class FutureWebAutoConfiguration implements WebMvcConfigurer {
 
     @Resource
     private WebProperties webProperties;
-    /**
-     * 应用名
-     */
+
     @Value("${spring.application.name}")
     private String applicationName;
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurePathMatch(configurer, webProperties.getControllerApi());
+        configurePathMatch(configurer, webProperties.getWebApi());
     }
 
     /**
@@ -56,18 +53,18 @@ public class FutureWebAutoConfiguration implements WebMvcConfigurer {
     private void configurePathMatch(PathMatchConfigurer configurer, WebProperties.Api api) {
         AntPathMatcher antPathMatcher = new AntPathMatcher(".");
         configurer.addPathPrefix(api.getPrefix(), clazz -> clazz.isAnnotationPresent(RestController.class)
-                && antPathMatcher.match(api.getController(), clazz.getPackage().getName())); // 仅仅匹配 controller 包
+                && antPathMatcher.match(api.getPath(), clazz.getPackage().getName())); // 仅仅匹配 controller 包
     }
 
     @Bean
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    public GlobalExceptionHandler globalExceptionHandler(ApiErrorLogApi apiErrorLogApi) {
-        return new GlobalExceptionHandler(applicationName, apiErrorLogApi);
+    public WebExceptionHandler globalExceptionHandler(ApiErrorLogApi apiErrorLogApi) {
+        return new WebExceptionHandler(applicationName, apiErrorLogApi);
     }
 
     @Bean
-    public GlobalResponseBodyHandler globalResponseBodyHandler() {
-        return new GlobalResponseBodyHandler();
+    public WebResponseBodyHandler globalResponseBodyHandler() {
+        return new WebResponseBodyHandler();
     }
 
     @Bean
@@ -75,8 +72,6 @@ public class FutureWebAutoConfiguration implements WebMvcConfigurer {
     public WebFrameworkUtils webFrameworkUtils(WebProperties webProperties) {
         return new WebFrameworkUtils(webProperties);
     }
-
-    // ========== Filter 相关 ==========
 
     /**
      * 创建 CorsFilter Bean，解决跨域问题
@@ -99,22 +94,10 @@ public class FutureWebAutoConfiguration implements WebMvcConfigurer {
         return createFilterBean(new CorsFilter(source), WebFilterOrderEnum.CORS_FILTER);
     }
 
-    /**
-     * 创建 RequestBodyCacheFilter Bean，可重复读取请求内容
-     */
     @Bean
     public FilterRegistrationBean<CacheRequestBodyFilter> requestBodyCacheFilter() {
         return createFilterBean(new CacheRequestBodyFilter(), WebFilterOrderEnum.REQUEST_BODY_CACHE_FILTER);
     }
-
-    /**
-     * 创建 DemoFilter Bean，演示模式
-     *//*
-    @Bean
-    @ConditionalOnProperty(value = "yudao.demo", havingValue = "true")
-    public FilterRegistrationBean<DemoFilter> demoFilter() {
-        return createFilterBean(new DemoFilter(), WebFilterOrderEnum.DEMO_FILTER);
-    }*/
 
     public static <T extends Filter> FilterRegistrationBean<T> createFilterBean(T filter, Integer order) {
         FilterRegistrationBean<T> bean = new FilterRegistrationBean<>(filter);
@@ -122,11 +105,6 @@ public class FutureWebAutoConfiguration implements WebMvcConfigurer {
         return bean;
     }
 
-    /**
-     * 创建 RestTemplate 实例
-     *
-     * @param restTemplateBuilder {@link RestTemplateAutoConfiguration#restTemplateBuilder}
-     */
     @Bean
     @ConditionalOnMissingBean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {

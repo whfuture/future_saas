@@ -39,13 +39,12 @@ import java.util.Set;
 
 import static wh.future.framework.common.enums.ErrorCodeConstants.*;
 
-/**
- * 全局异常处理器，将 Exception 翻译成 R + 对应的异常编号
- */
+
+@SuppressWarnings("LanguageDetectionInspection")
 @RestControllerAdvice
 @AllArgsConstructor
 @Slf4j
-public class GlobalExceptionHandler {
+public class WebExceptionHandler {
 
     /**
      * 忽略的 ServiceException 错误提示，避免打印过多 logger
@@ -55,11 +54,11 @@ public class GlobalExceptionHandler {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private final String applicationName;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private final ApiErrorLogApi apiErrorLogApi;
 
     /**
      * 处理所有异常，主要是提供给 Filter 使用
-     * 因为 Filter 不走 SpringMVC 的流程，但是我们又需要兜底处理异常，所以这里提供一个全量的异常处理过程，保持逻辑统一。
      *
      * @param request 请求
      * @param ex 异常
@@ -173,18 +172,16 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 处理 Dubbo Consumer 本地参数校验时，抛出的 ValidationException 异常
+     * 处理 Consumer 本地参数校验时，抛出的 ValidationException 异常
      */
     @ExceptionHandler(value = ValidationException.class)
     public R<?> validationException(ValidationException ex) {
         log.warn("[constraintViolationExceptionHandler]", ex);
-        // 无法拼接明细的错误信息，因为 Dubbo Consumer 抛出 ValidationException 异常时，是直接的字符串信息，且人类不可读
         return R.error(BAD_REQUEST);
     }
 
     /**
      * 处理 SpringMVC 请求地址不存在
-     *
      * 注意，它需要设置如下两个配置项：
      * 1. spring.mvc.throw-exception-if-no-handler-found 为 true
      * 2. spring.mvc.static-path-pattern 为 /statics/**
@@ -206,7 +203,6 @@ public class GlobalExceptionHandler {
 
     /**
      * 处理 SpringMVC 请求方法不正确
-     *
      * 例如说，A 接口的方法为 GET 方式，结果请求方法为 POST 方式，导致不匹配
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -217,7 +213,6 @@ public class GlobalExceptionHandler {
 
     /**
      * 处理 Spring Security 权限不足的异常
-     *
      * 来源是，使用 @PreAuthorize 注解，AOP 进行权限拦截
      */
     @ExceptionHandler(value = AccessDeniedException.class)
@@ -229,7 +224,6 @@ public class GlobalExceptionHandler {
 
     /**
      * 处理业务异常 ServiceException
-     *
      * 例如说，商品库存不足，用户手机号已存在。
      */
     @ExceptionHandler(value = BusinessException.class)

@@ -1,5 +1,7 @@
 package wh.future.framework.web.log;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
@@ -10,21 +12,17 @@ import javax.validation.constraints.NotNull;
 /**
  * @author Administrator
  */
+@Setter
+@Getter
 @ConfigurationProperties(prefix = "future.web")
 @Validated
 public class WebProperties {
 
     @NotNull(message = "API 不能为空")
-    private Api controllerApi = new Api("/api", "**.controller.**");
+    private Api webApi = new Api("/api", "**.controller.**");
 
-    public Api getControllerApi() {
-        return controllerApi;
-    }
-
-    public void setControllerApi(Api controllerApi) {
-        this.controllerApi = controllerApi;
-    }
-
+    @Setter
+    @Getter
     @Valid
     public static class Api {
 
@@ -32,28 +30,13 @@ public class WebProperties {
         private String prefix;
 
         @NotEmpty(message = "Controller 所在包不能为空")
-        private String controller;
+        private String path;
 
-        public Api(String prefix, String controller) {
+        public Api(String prefix, String path) {
             this.prefix = prefix;
-            this.controller = controller;
+            this.path = path;
         }
 
-        public String getPrefix() {
-            return prefix;
-        }
-
-        public void setPrefix(String prefix) {
-            this.prefix = prefix;
-        }
-
-        public String getController() {
-            return controller;
-        }
-
-        public void setController(String controller) {
-            this.controller = controller;
-        }
     }
 
 }
