@@ -24,6 +24,7 @@
 /Users/cccolors/IdeaProjects/future_saas/future_framework/future_framework_common/src/main/java/wh/future/framework/common/util/NumberUtil.java
 /Users/cccolors/IdeaProjects/future_saas/future_framework/future_framework_common/src/main/java/wh/future/framework/common/util/ObjectUtil.java
 /Users/cccolors/IdeaProjects/future_saas/future_framework/future_framework_common/src/main/java/wh/future/framework/common/util/ServletUtil.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future_framework_common/src/main/java/wh/future/framework/common/util/StrUtil.java
 /Users/cccolors/IdeaProjects/future_saas/future_framework/future_framework_common/src/main/java/wh/future/framework/common/util/TimeUtils.java
 /Users/cccolors/IdeaProjects/future_saas/future_framework/future_framework_common/src/main/java/wh/future/framework/common/util/TraceUtil.java
 /Users/cccolors/IdeaProjects/future_saas/future_framework/future_framework_common/src/main/java/wh/future/framework/common/validation/WithinEnum.java

@@ -16,8 +16,8 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.ConfigurableEnvironment;
-import wh.future.framework.db.mybatis.DefaultDBFieldHandler;
-import wh.future.framework.db.mybatis.IdTypeEnvironmentPostProcessor;
+import wh.future.framework.db.mybatis.handler.DefaultDBFieldHandler;
+import wh.future.framework.db.mybatis.handler.IdTypeEnvironmentPostProcessor;
 import java.util.concurrent.TimeUnit;
 
 @AutoConfiguration(before = MybatisPlusAutoConfiguration.class)

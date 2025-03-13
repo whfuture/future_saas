@@ -12,7 +12,7 @@ import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
 import wh.future.framework.common.pojo.PageParam;
 import wh.future.framework.common.pojo.SortField;
-import wh.future.framework.db.mybatis.DbTypeEnum;
+import wh.future.framework.db.mybatis.enums.DbTypeEnum;
 
 import java.util.ArrayList;
 import java.util.Collection;

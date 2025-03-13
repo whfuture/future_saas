@@ -4,7 +4,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.dynamic.datasource.DynamicRoutingDataSource;
 import com.baomidou.mybatisplus.annotation.DbType;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import wh.future.framework.db.mybatis.DbTypeEnum;
+import wh.future.framework.db.mybatis.enums.DbTypeEnum;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

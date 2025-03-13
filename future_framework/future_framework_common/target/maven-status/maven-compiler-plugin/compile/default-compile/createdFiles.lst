@@ -6,6 +6,7 @@ wh/future/framework/common/validation/WithinEnumValidator.class
 wh/future/framework/common/util/JsonUtil.class
 wh/future/framework/common/enums/ArrayAble.class
 wh/future/framework/common/check/InEnumsChecker.class
+wh/future/framework/common/util/StrUtil.class
 wh/future/framework/common/exception/AssertUtils.class
 wh/future/framework/common/enums/ErrorCodeConstants.class
 wh/future/framework/common/pojo/PageResult.class
