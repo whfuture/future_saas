@@ -1,0 +1,4 @@
+wh.future.framework.web.api_log.conf.RequestApiLogAutoConfiguration
+wh.future.framework.web.request.conf.FutureWebAutoConfiguration
+wh.future.framework.web.xss.conf.XssAutoConfiguration
+wh.future.framework.web.open_api.conf.OpenApiAutoConfiguration

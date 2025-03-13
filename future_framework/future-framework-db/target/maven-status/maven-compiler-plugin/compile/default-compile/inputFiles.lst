@@ -1,0 +1,12 @@
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/datasource/DruidAdRemoveFilter.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/datasource/conf/DataSourceConfiguration.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/datasource/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/mybatis/BaseDO.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/mybatis/DbTypeEnum.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/mybatis/DefaultDBFieldHandler.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/mybatis/IdTypeEnvironmentPostProcessor.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/mybatis/conf/MybatisAutoConfiguration.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/mybatis/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/util/JdbcUtil.java
+/Users/cccolors/IdeaProjects/future_saas/future_framework/future-framework-db/src/main/java/wh/future/framework/db/util/MyBatisUtil.java

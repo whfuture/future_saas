@@ -1,0 +1,15 @@
+wh/future/module/system/logic/user/req/package-info.class
+wh/future/module/system/event/package-info.class
+wh/future/module/system/util/package-info.class
+wh/future/module/system/logic/user/entity/package-info.class
+wh/future/module/system/logic/user/service/UserService.class
+wh/future/module/system/logic/user/mapper/UserMapper.class
+wh/future/module/system/logic/package-info.class
+wh/future/module/system/rpc_api/package-info.class
+wh/future/module/system/package-info.class
+wh/future/module/system/base/package-info.class
+wh/future/module/system/App.class
+wh/future/module/system/logic/user/convert/package-info.class
+wh/future/module/system/logic/user/resp/package-info.class
+wh/future/module/system/logic/user/UserController.class
+wh/future/module/system/job/package-info.class

@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>wh.future</groupId>
-            <artifactId>future_common</artifactId>
+            <artifactId>future_framework_common</artifactId>
             <version>2025.02.12-cq</version>
         </dependency>
 

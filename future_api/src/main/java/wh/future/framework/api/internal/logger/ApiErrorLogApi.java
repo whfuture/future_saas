@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @Tag(name = "RPC 服务 - API 异常日志")
 public interface ApiErrorLogApi {
 
-    String PREFIX = ApiConstants.PREFIX + "/api-error-log";
+    String PREFIX = ApiConstants.PREFIX + "/api-error-api_log";
 
     @PostMapping(PREFIX + "/create")
     @Operation(summary = "创建 API 异常日志")

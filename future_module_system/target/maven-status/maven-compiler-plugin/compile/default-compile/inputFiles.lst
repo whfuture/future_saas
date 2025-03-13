@@ -1,0 +1,15 @@
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/App.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/base/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/event/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/job/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/logic/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/logic/user/UserController.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/logic/user/convert/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/logic/user/entity/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/logic/user/mapper/UserMapper.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/logic/user/req/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/logic/user/resp/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/logic/user/service/UserService.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/rpc_api/package-info.java
+/Users/cccolors/IdeaProjects/future_saas/future_module_system/src/main/java/wh/future/module/system/util/package-info.java
