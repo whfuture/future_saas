@@ -1,4 +1,4 @@
-package wh.future.framework.db.mybatis.handler;
+package wh.future.framework.db.mybatis.processor;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;

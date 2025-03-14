@@ -1,1 +1,2 @@
 org.springframework.boot.env.EnvironmentPostProcessor=\
+wh.future.framework.db.mybatis.processor.IdTypeEnvironmentPostProcessor
