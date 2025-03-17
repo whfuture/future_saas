@@ -24,5 +24,5 @@ hs_err_pid*
 replay_pid*
 /.idea/
 *.flattened-pom.xml
-/future_framework/future-framework-db/target/
+/future_framework/*/target/
 /*/target/
