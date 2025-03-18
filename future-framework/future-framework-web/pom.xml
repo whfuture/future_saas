@@ -19,9 +19,8 @@
     <dependencies>
         <dependency>
             <groupId>wh.future</groupId>
-            <artifactId>future_common</artifactId>
+            <artifactId>future-framework-common</artifactId>
             <version>2025.02.12-cq</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>wh.future</groupId>

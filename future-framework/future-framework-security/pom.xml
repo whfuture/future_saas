@@ -18,10 +18,14 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>wh.future</groupId>
-            <artifactId>future_common</artifactId>
+            <artifactId>future-api</artifactId>
+            <version>2025.02.12-cq</version>
+        </dependency>
+        <dependency>
+            <groupId>wh.future</groupId>
+            <artifactId>future-framework-common</artifactId>
             <version>2025.02.12-cq</version>
         </dependency>
         <!-- spring boot 配置所需依赖 -->
@@ -46,6 +50,10 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
         </dependency>
     </dependencies>
 </project>
