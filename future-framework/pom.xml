@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>wh.future</groupId>
+        <artifactId>saas</artifactId>
+        <version>2025.02.12-cq</version>
+    </parent>
+
+    <artifactId>future-framework</artifactId>
+    <packaging>pom</packaging>
+
+    <name>future_framework</name>
+    <modules>
+        <module>future-framework-common</module>
+        <module>future-framework-web</module>
+        <module>future-framework-kafka</module>
+        <module>future-framework-redis</module>
+        <module>future-framework-security</module>
+        <module>future-framework-jackson</module>
+        <module>future-framework-desensitization</module>
+        <module>future-framework-db</module>
+        <module>future-framework-feign</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+</project>

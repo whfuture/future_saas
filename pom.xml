@@ -10,9 +10,9 @@
     <name>wh.future</name>
     <url>https://github.com/whfuture/future_saas</url>
     <modules>
-        <module>future_framework</module>
-        <module>future_api</module>
-        <module>future_module_system</module>
+        <module>future-framework</module>
+        <module>future-api</module>
+        <module>future-module-system</module>
     </modules>
 
 

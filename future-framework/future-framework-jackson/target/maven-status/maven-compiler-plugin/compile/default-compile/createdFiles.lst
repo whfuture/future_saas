@@ -1,0 +1,5 @@
+wh\future\framework\jackson\NumberSerializer.class
+wh\future\framework\jackson\TimestampLocalDateTimeSerializer.class
+wh\future\framework\jackson\conf\JacksonConfiguration.class
+wh\future\framework\jackson\package-info.class
+wh\future\framework\jackson\TimestampLocalDateTimeDeserializer.class
