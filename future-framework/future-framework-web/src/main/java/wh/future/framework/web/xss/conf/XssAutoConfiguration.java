@@ -14,8 +14,7 @@ import org.springframework.util.PathMatcher;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import wh.future.framework.common.enums.WebFilterOrderEnum;
 import wh.future.framework.web.xss.*;
-
-import static wh.future.framework.web.request.conf.FutureWebAutoConfiguration.createFilterBean;
+import javax.servlet.Filter;
 
 
 @AutoConfiguration
@@ -50,6 +49,11 @@ public class XssAutoConfiguration implements WebMvcConfigurer {
         return builder -> builder.deserializerByType(String.class, new XssStringJsonDeserializer(properties, pathMatcher, xssCleaner));
     }
 
+    public static <T extends Filter> FilterRegistrationBean<T> createFilterBean(T filter, Integer order) {
+        FilterRegistrationBean<T> bean = new FilterRegistrationBean<>(filter);
+        bean.setOrder(order);
+        return bean;
+    }
     /**
      * 创建 XssFilter Bean，解决 Xss 安全问题
      */
