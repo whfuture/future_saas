@@ -41,21 +41,12 @@ public class FutureWebAutoConfiguration implements WebMvcConfigurer {
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurePathMatch(configurer, webProperties.getWebApi());
-    }
-
-    /**
-     * 设置 API 前缀，仅仅匹配 controller 包下的
-     *
-     * @param configurer 配置
-     * @param api        API 配置
-     */
-    private void configurePathMatch(PathMatchConfigurer configurer, WebProperties.Api api) {
         AntPathMatcher antPathMatcher = new AntPathMatcher(".");
-        configurer.addPathPrefix(api.getPrefix(), clazz -> clazz.isAnnotationPresent(RestController.class)
-                && antPathMatcher.match(api.getPath(), clazz.getPackage().getName())); // 仅仅匹配 controller 包
+        configurer.addPathPrefix(webProperties.getWebApi().getPrefix(), clazz -> clazz.isAnnotationPresent(RestController.class)
+                && antPathMatcher.match(webProperties.getWebApi().getPath(), clazz.getPackage().getName()));
     }
 
+    /*初始化异常，将api注入进来方便异常后记录落库*/
     @Bean
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public WebExceptionHandler globalExceptionHandler(ApiErrorLogApi apiErrorLogApi) {
@@ -67,42 +58,28 @@ public class FutureWebAutoConfiguration implements WebMvcConfigurer {
         return new WebResponseBodyHandler();
     }
 
+    /*也是将配置数据初始化到util中去*/
     @Bean
     @SuppressWarnings("InstantiationOfUtilityClass")
     public WebFrameworkUtils webFrameworkUtils(WebProperties webProperties) {
         return new WebFrameworkUtils(webProperties);
     }
 
-    /**
-     * 创建 CorsFilter Bean，解决跨域问题
-     */
     @Bean
     public FilterRegistrationBean<CorsFilter> corsFilterBean() {
-        // 创建 CorsConfiguration 对象
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        // 设置访问源地址
         config.addAllowedOriginPattern("*");
-        // 设置访问源请求头
         config.addAllowedHeader("*");
-        // 设置访问源请求方法
         config.addAllowedMethod("*");
-        // 创建 UrlBasedCorsConfigurationSource 对象
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        // 对接口配置跨域设置
         source.registerCorsConfiguration("/**", config);
-        return createFilterBean(new CorsFilter(source), WebFilterOrderEnum.CORS_FILTER);
+        return doCreateFilterBean(new CorsFilter(source), WebFilterOrderEnum.CORS_FILTER);
     }
 
     @Bean
     public FilterRegistrationBean<CacheRequestBodyFilter> requestBodyCacheFilter() {
-        return createFilterBean(new CacheRequestBodyFilter(), WebFilterOrderEnum.REQUEST_BODY_CACHE_FILTER);
-    }
-
-    public static <T extends Filter> FilterRegistrationBean<T> createFilterBean(T filter, Integer order) {
-        FilterRegistrationBean<T> bean = new FilterRegistrationBean<>(filter);
-        bean.setOrder(order);
-        return bean;
+        return doCreateFilterBean(new CacheRequestBodyFilter(), WebFilterOrderEnum.REQUEST_BODY_CACHE_FILTER);
     }
 
     @Bean
@@ -111,4 +88,9 @@ public class FutureWebAutoConfiguration implements WebMvcConfigurer {
         return restTemplateBuilder.build();
     }
 
+    public static <T extends Filter> FilterRegistrationBean<T> doCreateFilterBean(T filter, Integer order) {
+        FilterRegistrationBean<T> bean = new FilterRegistrationBean<>(filter);
+        bean.setOrder(order);
+        return bean;
+    }
 }

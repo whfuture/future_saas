@@ -21,6 +21,7 @@
         <module>future-framework-desensitization</module>
         <module>future-framework-db</module>
         <module>future-framework-feign</module>
+        <module>future-framework-log</module>
     </modules>
 
     <properties>
