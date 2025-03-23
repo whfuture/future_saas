@@ -1,4 +1,4 @@
-package wh.future.framework.api.internal.logger.enums;
+package wh.future.framework.api.internal.api.enums;
 
 
 import wh.future.framework.common.enums.RpcConstants;

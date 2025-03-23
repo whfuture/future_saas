@@ -1,4 +1,4 @@
-package wh.future.framework.api.internal.business_logger;
+package wh.future.framework.api.internal.operation;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -8,10 +8,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import wh.future.framework.api.internal.business_logger.dto.OperateLogCreateReqDTO;
-import wh.future.framework.api.internal.business_logger.dto.OperateLogPageReqDTO;
-import wh.future.framework.api.internal.business_logger.dto.OperateLogRespDTO;
-import wh.future.framework.api.internal.business_logger.enums.ApiConstants;
+import wh.future.framework.api.internal.operation.dto.OperateLogCreateReqDTO;
+import wh.future.framework.api.internal.operation.dto.OperateLogPageReqDTO;
+import wh.future.framework.api.internal.operation.dto.OperateLogRespDTO;
+import wh.future.framework.api.internal.operation.enums.ApiConstants;
 import wh.future.framework.common.pojo.PageResult;
 import wh.future.framework.common.pojo.R;
 

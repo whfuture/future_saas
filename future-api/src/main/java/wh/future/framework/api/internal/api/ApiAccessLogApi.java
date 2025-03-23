@@ -1,4 +1,4 @@
-package wh.future.framework.api.internal.logger;
+package wh.future.framework.api.internal.api;
 
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -7,8 +7,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import wh.future.framework.api.internal.logger.dto.ApiAccessLogCreateReq;
-import wh.future.framework.api.internal.logger.enums.ApiConstants;
+import wh.future.framework.api.internal.api.dto.ApiAccessLogCreateReq;
+import wh.future.framework.api.internal.api.enums.ApiConstants;
 import wh.future.framework.common.pojo.R;
 
 import javax.validation.Valid;

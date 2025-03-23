@@ -1,4 +1,4 @@
-package wh.future.framework.api.internal.logger.dto;
+package wh.future.framework.api.internal.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
