@@ -115,7 +115,7 @@ public class OpenApiAutoConfiguration {
     public static GroupedOpenApi buildGroupedOpenApi(String group, String path) {
         return GroupedOpenApi.builder()
                 .group(group)
-                .pathsToMatch("/api/" + path + "/**")
+                .pathsToMatch("/api_log/" + path + "/**")
                 .addOperationCustomizer((operation, handlerMethod) -> operation
                         .addParametersItem(buildTenantHeaderParameter())
                         .addParametersItem(buildSecurityHeaderParameter()))

@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 public class WebProperties {
 
     @NotNull(message = "API 不能为空")
-    private Api webApi = new Api("/api", "**.controller.**");
+    private Api webApi = new Api("/api_log", "**.controller.**");
 
     @Setter
     @Getter

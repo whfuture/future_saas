@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>wh.future</groupId>
-            <artifactId>future-api</artifactId>
+            <artifactId>future-rpc</artifactId>
             <version>2025.02.12-cq</version>
             <scope>compile</scope>
         </dependency>

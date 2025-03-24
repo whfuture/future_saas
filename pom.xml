@@ -11,7 +11,7 @@
     <url>https://github.com/whfuture/future_saas</url>
     <modules>
         <module>future-framework</module>
-        <module>future-api</module>
+        <module>future-rpc</module>
         <module>future-service-system</module>
     </modules>
 
@@ -321,7 +321,7 @@
                 <version>${skywalking.version}</version>
                 <!--                <exclusions>-->
                 <!--                    <exclusion>-->
-                <!--                        <artifactId>opentracing-api</artifactId>-->
+                <!--                        <artifactId>opentracing-api_log</artifactId>-->
                 <!--                        <groupId>io.opentracing</groupId>-->
                 <!--                    </exclusion>-->
                 <!--                    <exclusion>-->

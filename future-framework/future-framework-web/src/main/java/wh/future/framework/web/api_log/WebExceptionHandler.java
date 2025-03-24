@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import wh.future.framework.api.internal.api.ApiErrorLogApi;
-import wh.future.framework.api.internal.api.dto.ApiErrorLogCreateReq;
+import wh.future.framework.rpc.api_log.ApiErrorLogApi;
+import wh.future.framework.rpc.api_log.req.ApiErrorLogCreateReq;
 import wh.future.framework.common.exception.AssertUtils;
 import wh.future.framework.common.exception.BusinessException;
 import wh.future.framework.common.pojo.R;
@@ -196,7 +196,7 @@ public class WebExceptionHandler {
 //     * 处理 SpringMVC 请求地址不存在
 //     */
 //    @ExceptionHandler(NoResourceFoundException.class)
-//    private R<?> noResourceFoundExceptionHandler(HttpServletRequest req, NoResourceFoundException ex) {
+//    private R<?> noResourceFoundExceptionHandler(HttpServletRequest resp, NoResourceFoundException ex) {
 //        api_log.warn("[noResourceFoundExceptionHandler]", ex);
 //        return R.error(NOT_FOUND.getCode(), String.format("请求地址不存在:%s", ex.getResourcePath()));
 //    }

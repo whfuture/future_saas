@@ -15,7 +15,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import wh.future.framework.api.internal.api.ApiErrorLogApi;
+import wh.future.framework.rpc.api_log.ApiErrorLogApi;
 import wh.future.framework.common.enums.WebFilterOrderEnum;
 import wh.future.framework.web.api_log.WebExceptionHandler;
 import wh.future.framework.web.api_log.WebResponseBodyHandler;
