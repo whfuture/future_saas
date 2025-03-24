@@ -12,7 +12,7 @@
     <modules>
         <module>future-framework</module>
         <module>future-api</module>
-        <module>future-module-system</module>
+        <module>future-service-system</module>
     </modules>
 
 

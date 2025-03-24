@@ -7,10 +7,10 @@
         <version>2025.02.12-cq</version>
     </parent>
 
-    <artifactId>future-module-system</artifactId>
+    <artifactId>future-service-system</artifactId>
     <packaging>jar</packaging>
 
-    <name>future_system</name>
+    <name>future-service-system</name>
     <url>http://maven.apache.org</url>
 
     <properties>
